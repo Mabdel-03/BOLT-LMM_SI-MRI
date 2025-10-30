@@ -76,10 +76,11 @@ On the HPC, ensure:
 # On HPC, in this directory
 cd /home/mabdel03/data/files/Isolation_Genetics/GWAS/Scripts/ukb21942/BOLT-LMM_SI-MRI
 
-# Filter phenotype and covariate files for each population
-bash filter_to_population.sh EUR_MM
-bash filter_to_population.sh EUR_Male_MM
-bash filter_to_population.sh EUR_Female_MM
+# Submit batch job to filter phenotype and covariate files for all 3 populations
+sbatch 0a_filter_populations.sbatch.sh
+
+# Monitor
+tail -f 0a_filter.out
 
 # This creates:
 # - MRIrun2.EUR_MM.tsv.gz
@@ -94,10 +95,10 @@ bash filter_to_population.sh EUR_Female_MM
 
 ```bash
 # Test with one phenotype and population
-sbatch 0_test_run.sbatch.sh
+sbatch 0b_test_run.sbatch.sh
 
 # Monitor
-tail -f 0_test.out
+tail -f 0b_test.out
 
 # Check for "TEST PASSED" message
 # Review output: results/Day_NoPCs/EUR_MM/bolt_FA.Day_NoPCs.stats.gz
@@ -110,7 +111,7 @@ tail -f 0_test.out
 sbatch 1_run_bolt_lmm.sbatch.sh
 
 # Monitor progress
-squeue -u $USER
+squeue -u mabdel03
 
 # Check individual job outputs
 tail -f 1_*.out

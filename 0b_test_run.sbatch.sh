@@ -4,8 +4,8 @@
 #SBATCH --mem=150G
 #SBATCH -n 100
 #SBATCH --time=12:00:00
-#SBATCH --output=0_test.out
-#SBATCH --error=0_test.err
+#SBATCH --output=0b_test.out
+#SBATCH --error=0b_test.err
 #SBATCH --mail-user=mabdel03@mit.edu
 #SBATCH --mail-type=BEGIN,END,FAIL
 
@@ -64,7 +64,7 @@ if [ ${test_exit} -eq 0 ]; then
     echo ""
 else
     echo "❌ TEST FAILED"
-    echo "Check error messages above and in 0_test.err"
+    echo "Check error messages above and in 0b_test.err"
     echo "Do NOT proceed to full analysis"
     exit 1
 fi
