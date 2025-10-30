@@ -1,9 +1,9 @@
 #!/bin/bash
 #SBATCH --job-name=bolt_mri_test
 #SBATCH --partition=kellis
-#SBATCH --mem=150G
-#SBATCH -n 100
-#SBATCH --time=12:00:00
+#SBATCH --mem=100G
+#SBATCH -n 32
+#SBATCH --time=47:00:00
 #SBATCH --output=0b_test.out
 #SBATCH --error=0b_test.err
 #SBATCH --mail-user=mabdel03@mit.edu
@@ -17,7 +17,7 @@ echo "========================================"
 echo "BOLT-LMM MRI Test Run"
 echo "Job ID: $SLURM_JOB_ID"
 echo "Node: $SLURM_NODELIST"
-echo "Resources: 150GB RAM, 100 CPUs"
+echo "Resources: 100GB RAM, 32 CPUs"
 echo "Start time: $(date)"
 echo "========================================"
 
