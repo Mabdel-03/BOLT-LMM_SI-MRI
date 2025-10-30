@@ -116,7 +116,7 @@ echo ""
         --geneticMapFile=${genetic_map_file} \
         --lmm \
         --LDscoresMatchBp \
-        --numThreads=100 \
+        --numThreads=32 \
         --statsFile=${out_file}.stats \
         --verboseStats \
         2>&1 | tee ${out_file}.log
