@@ -24,7 +24,7 @@ cd /home/mabdel03/data/files/Isolation_Genetics/GWAS/Scripts/ukb21942/BOLT-LMM_S
 # Check prerequisites
 ls -lh ../geno/ukb_genoHM3/ukb_genoHM3_bed.bed           # Genotypes (should exist)
 ls -lh ../geno/ukb_genoHM3/ukb_genoHM3_modelSNPs.txt    # Model SNPs (should exist)
-ls -lh ../pheno/loneliness_NoMR/MRIrun2.tsv.gz          # Phenotypes (should exist)
+ls -lh ../pheno/MRIrun2.tsv.gz          # Phenotypes (should exist)
 ls -lh ../sqc/sqc.20220316.tsv.gz                        # Covariates (should exist)
 ls -lh ../sqc/population.20220316/EUR_MM.keep           # Keep files (should exist)
 ```

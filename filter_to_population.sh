@@ -25,7 +25,7 @@ echo ""
 
 # Input files
 keep_file="${ukb21942_d}/sqc/population.20220316/${keep_set}.keep"
-pheno_file="${ukb21942_d}/pheno/loneliness_NoMR/MRIrun2.tsv.gz"
+pheno_file="${ukb21942_d}/pheno/MRIrun2.tsv.gz"
 covar_file="${ukb21942_d}/sqc/sqc.20220316.tsv.gz"
 
 # Output files (in analysis directory for easy access)

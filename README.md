@@ -67,7 +67,7 @@ On the HPC, ensure:
 - [x] Genotype files converted to BED format (`ukb_genoHM3_bed.*`)
 - [x] Model SNPs prepared (`ukb_genoHM3_modelSNPs.txt`)
 - [x] Population keep files exist in `sqc/population.20220316/`
-- [x] Phenotype file: `pheno/loneliness_NoMR/MRIrun2.tsv.gz`
+- [x] Phenotype file: `pheno/MRIrun2.tsv.gz`
 - [x] Covariate file: `sqc/sqc.20220316.tsv.gz`
 
 ### Step 1: Filter to Populations
