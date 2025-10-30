@@ -39,32 +39,34 @@ If any files are missing, they need to be created first (see main README.md).
 
 **Purpose**: Create population-specific phenotype and covariate files
 
-**Commands** (run each separately):
+**Command** (⭐ recommended - more robust):
 ```bash
-# Filter for EUR_MM (includes related individuals)
+# Python script (filters all 3 populations at once)
+python3 filter_populations.py
+```
+
+**Alternative** (bash scripts - run each separately):
+```bash
 bash filter_to_EUR_MM.sh
-
-# Filter for EUR_Male
 bash filter_to_EUR_Male.sh
-
-# Filter for EUR_Female
 bash filter_to_EUR_Female.sh
 ```
 
 **What it does**:
-- Filters phenotypes and covariates for each population
+- Filters phenotypes and covariates for EUR_MM, EUR_Male, EUR_Female
 - Creates 6 files total: 3 phenotype files + 3 covariate files
-- Each takes ~2-5 minutes
-- **Note**: Run directly with bash (not sbatch) - matches working repo
+- Takes ~5-15 minutes total
+- Ensures FID/IID headers for BOLT compatibility
+- **Note**: Run directly (not sbatch) - matches working repo
 
 **Expected output**:
 ```
-MRIrun2.EUR_MM.tsv.gz
-MRIrun2.EUR_Male.tsv.gz
-MRIrun2.EUR_Female.tsv.gz
-sqc.EUR_MM.tsv.gz
-sqc.EUR_Male.tsv.gz
-sqc.EUR_Female.tsv.gz
+MRIrun2.EUR_MM.tsv.gz      (~XX MB)
+MRIrun2.EUR_Male.tsv.gz    (~XX MB)
+MRIrun2.EUR_Female.tsv.gz  (~XX MB)
+sqc.EUR_MM.tsv.gz          (~XXX MB)
+sqc.EUR_Male.tsv.gz        (~XXX MB)
+sqc.EUR_Female.tsv.gz      (~XXX MB)
 ```
 
 **Verify all files created**:
@@ -186,10 +188,8 @@ results/
 # Navigate to directory
 cd /home/mabdel03/data/files/Isolation_Genetics/GWAS/Scripts/ukb21942/BOLT-LMM_SI-MRI
 
-# Step 1: Filter populations (~5-15 min total, run with bash not sbatch)
-bash filter_to_EUR_MM.sh
-bash filter_to_EUR_Male.sh
-bash filter_to_EUR_Female.sh
+# Step 1: Filter populations (~5-15 min total)
+python3 filter_populations.py   # ⭐ Recommended (more robust)
 
 # Verify 6 files created
 ls -lh *.EUR*.tsv.gz | wc -l  # Should show: 6
