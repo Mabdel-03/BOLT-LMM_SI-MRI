@@ -26,27 +26,44 @@ echo ""
 SRCDIR="/home/mabdel03/data/files/Isolation_Genetics/GWAS/Scripts/ukb21942/BOLT-LMM_SI-MRI"
 cd ${SRCDIR}
 
-# Filter for each population
-for keep_set in EUR_MM EUR_Male EUR_Female; do
-    echo "========================================"
-    echo "Filtering for: ${keep_set}"
-    echo "========================================"
-    bash filter_to_population.sh ${keep_set}
-    
-    if [ $? -ne 0 ]; then
-        echo "ERROR: Filtering failed for ${keep_set}" >&2
-        exit 1
-    fi
-    echo ""
-done
+# Filter for each population (using separate scripts like working repo)
+echo "========================================"
+echo "Filtering for: EUR_MM"
+echo "========================================"
+bash filter_to_EUR_MM.sh
+if [ $? -ne 0 ]; then
+    echo "ERROR: Filtering failed for EUR_MM" >&2
+    exit 1
+fi
+echo ""
+
+echo "========================================"
+echo "Filtering for: EUR_Male"
+echo "========================================"
+bash filter_to_EUR_Male.sh
+if [ $? -ne 0 ]; then
+    echo "ERROR: Filtering failed for EUR_Male" >&2
+    exit 1
+fi
+echo ""
+
+echo "========================================"
+echo "Filtering for: EUR_Female"
+echo "========================================"
+bash filter_to_EUR_Female.sh
+if [ $? -ne 0 ]; then
+    echo "ERROR: Filtering failed for EUR_Female" >&2
+    exit 1
+fi
+echo ""
 
 echo "========================================"
 echo "✅ ALL POPULATION FILTERING COMPLETED"
 echo "========================================"
 echo ""
 echo "Files created:"
-ls -lh ${SRCDIR}/MRIrun2.*.tsv.gz
-ls -lh ${SRCDIR}/sqc.*.tsv.gz
+ls -lh ${SRCDIR}/MRIrun2.EUR*.tsv.gz
+ls -lh ${SRCDIR}/sqc.EUR*.tsv.gz
 echo ""
 echo "Next steps:"
 echo "1. Test: sbatch 0b_test_run.sbatch.sh"
