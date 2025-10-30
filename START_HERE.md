@@ -7,7 +7,7 @@
 ## What This Analysis Does
 
 - **4 MRI phenotypes**: FA, MD, MO, OD (diffusion MRI metrics)
-- **3 population stratifications**: EUR_MM, EUR_Male_MM, EUR_Female_MM
+- **3 population stratifications**: EUR_MM, EUR_Male, EUR_Female
 - **1 covariate model**: Day_NoPCs (age, sex, array)
 - **Total**: 12 GWAS analyses
 
@@ -45,18 +45,18 @@ sbatch 0a_filter_populations.sbatch.sh
 ```
 
 **What it does**:
-- Filters phenotypes and covariates for EUR_MM, EUR_Male_MM, EUR_Female_MM
+- Filters phenotypes and covariates for EUR_MM, EUR_Male, EUR_Female
 - Creates 6 files: 3 phenotype files + 3 covariate files
 - Takes ~5-10 minutes
 
 **Expected output**:
 ```
 MRIrun2.EUR_MM.tsv.gz
-MRIrun2.EUR_Male_MM.tsv.gz
-MRIrun2.EUR_Female_MM.tsv.gz
+MRIrun2.EUR_Male.tsv.gz
+MRIrun2.EUR_Female.tsv.gz
 sqc.EUR_MM.tsv.gz
-sqc.EUR_Male_MM.tsv.gz
-sqc.EUR_Female_MM.tsv.gz
+sqc.EUR_Male.tsv.gz
+sqc.EUR_Female.tsv.gz
 ```
 
 **Monitor**:
@@ -129,10 +129,10 @@ sbatch 1_run_bolt_lmm.sbatch.sh
 
 **Job mapping**:
 ```
-Task 1-3:   FA × [EUR_MM, EUR_Male_MM, EUR_Female_MM]
-Task 4-6:   MD × [EUR_MM, EUR_Male_MM, EUR_Female_MM]
-Task 7-9:   MO × [EUR_MM, EUR_Male_MM, EUR_Female_MM]
-Task 10-12: OD × [EUR_MM, EUR_Male_MM, EUR_Female_MM]
+Task 1-3:   FA × [EUR_MM, EUR_Male, EUR_Female]
+Task 4-6:   MD × [EUR_MM, EUR_Male, EUR_Female]
+Task 7-9:   MO × [EUR_MM, EUR_Male, EUR_Female]
+Task 10-12: OD × [EUR_MM, EUR_Male, EUR_Female]
 ```
 
 **Monitor progress**:
@@ -164,9 +164,9 @@ results/
     │   ├── bolt_MO.Day_NoPCs.log.gz
     │   ├── bolt_OD.Day_NoPCs.stats.gz
     │   └── bolt_OD.Day_NoPCs.log.gz
-    ├── EUR_Male_MM/
+    ├── EUR_Male/
     │   └── [same 8 files]
-    └── EUR_Female_MM/
+    └── EUR_Female/
         └── [same 8 files]
 ```
 
@@ -213,7 +213,7 @@ ls -lh results/Day_NoPCs/*/bolt_*.stats.gz
 
 ```bash
 # For each phenotype-population combo
-for pop in EUR_MM EUR_Male_MM EUR_Female_MM; do
+for pop in EUR_MM EUR_Male EUR_Female; do
     for pheno in FA MD MO OD; do
         echo "=== ${pheno} - ${pop} ==="
         
@@ -244,8 +244,8 @@ done
 
 - **Sample sizes**: 
   - EUR_MM: ~426,000
-  - EUR_Male_MM: ~200,000
-  - EUR_Female_MM: ~226,000
+  - EUR_Male: ~200,000
+  - EUR_Female: ~226,000
 - **Variants**: ~1.3 million (autosomal)
 - **Heritability**: 10-40% for brain traits (varies by phenotype)
 - **λ_GC**: 1.00-1.05 (well-calibrated)

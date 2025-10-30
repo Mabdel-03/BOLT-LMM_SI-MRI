@@ -22,8 +22,8 @@ This analysis performs genome-wide association studies (GWAS) for brain MRI phen
 | Population | Description | Expected N |
 |------------|-------------|------------|
 | **EUR_MM** | European ancestry (includes related individuals) | ~426,000 |
-| **EUR_Male_MM** | European ancestry males only | ~200,000 |
-| **EUR_Female_MM** | European ancestry females only | ~226,000 |
+| **EUR_Male** | European ancestry males only | ~200,000 |
+| **EUR_Female** | European ancestry females only | ~226,000 |
 
 ### Covariate Model
 
@@ -52,10 +52,10 @@ This analysis performs genome-wide association studies (GWAS) for brain MRI phen
 
 | Task | Phenotype | Population |
 |------|-----------|------------|
-| 1-3 | FA | EUR_MM, EUR_Male_MM, EUR_Female_MM |
-| 4-6 | MD | EUR_MM, EUR_Male_MM, EUR_Female_MM |
-| 7-9 | MO | EUR_MM, EUR_Male_MM, EUR_Female_MM |
-| 10-12 | OD | EUR_MM, EUR_Male_MM, EUR_Female_MM |
+| 1-3 | FA | EUR_MM, EUR_Male, EUR_Female |
+| 4-6 | MD | EUR_MM, EUR_Male, EUR_Female |
+| 7-9 | MO | EUR_MM, EUR_Male, EUR_Female |
+| 10-12 | OD | EUR_MM, EUR_Male, EUR_Female |
 
 ---
 
@@ -84,11 +84,11 @@ tail -f 0a_filter.out
 
 # This creates:
 # - MRIrun2.EUR_MM.tsv.gz
-# - MRIrun2.EUR_Male_MM.tsv.gz
-# - MRIrun2.EUR_Female_MM.tsv.gz
+# - MRIrun2.EUR_Male.tsv.gz
+# - MRIrun2.EUR_Female.tsv.gz
 # - sqc.EUR_MM.tsv.gz
-# - sqc.EUR_Male_MM.tsv.gz
-# - sqc.EUR_Female_MM.tsv.gz
+# - sqc.EUR_Male.tsv.gz
+# - sqc.EUR_Female.tsv.gz
 ```
 
 ### Step 2: Test Run
@@ -134,16 +134,16 @@ BOLT-LMM_SI-MRI/
 │       │   ├── bolt_MO.Day_NoPCs.log.gz
 │       │   ├── bolt_OD.Day_NoPCs.stats.gz
 │       │   └── bolt_OD.Day_NoPCs.log.gz
-│       ├── EUR_Male_MM/
+│       ├── EUR_Male/
 │       │   └── [same 8 files]
-│       └── EUR_Female_MM/
+│       └── EUR_Female/
 │           └── [same 8 files]
 ├── MRIrun2.EUR_MM.tsv.gz
-├── MRIrun2.EUR_Male_MM.tsv.gz
-├── MRIrun2.EUR_Female_MM.tsv.gz
+├── MRIrun2.EUR_Male.tsv.gz
+├── MRIrun2.EUR_Female.tsv.gz
 ├── sqc.EUR_MM.tsv.gz
-├── sqc.EUR_Male_MM.tsv.gz
-└── sqc.EUR_Female_MM.tsv.gz
+├── sqc.EUR_Male.tsv.gz
+└── sqc.EUR_Female.tsv.gz
 ```
 
 ---
@@ -257,7 +257,7 @@ Estimate heritability and genetic correlations:
 
 ```bash
 # Heritability for each phenotype-population
-for pop in EUR_MM EUR_Male_MM EUR_Female_MM; do
+for pop in EUR_MM EUR_Male EUR_Female; do
     for pheno in FA MD MO OD; do
         ldsc.py \
             --h2 results/Day_NoPCs/${pop}/bolt_${pheno}.Day_NoPCs.stats.gz \
@@ -269,7 +269,7 @@ done
 
 # Genetic correlation between males and females
 ldsc.py \
-    --rg results/Day_NoPCs/EUR_Male_MM/bolt_FA.Day_NoPCs.stats.gz,results/Day_NoPCs/EUR_Female_MM/bolt_FA.Day_NoPCs.stats.gz \
+    --rg results/Day_NoPCs/EUR_Male/bolt_FA.Day_NoPCs.stats.gz,results/Day_NoPCs/EUR_Female/bolt_FA.Day_NoPCs.stats.gz \
     --ref-ld-chr eur_w_ld_chr/ \
     --w-ld-chr eur_w_ld_chr/ \
     --out FA_Male_vs_Female.rg
@@ -312,8 +312,8 @@ Compare results to:
 ```bash
 # Solution: Run filter_to_population.sh for all three populations
 bash filter_to_population.sh EUR_MM
-bash filter_to_population.sh EUR_Male_MM
-bash filter_to_population.sh EUR_Female_MM
+bash filter_to_population.sh EUR_Male
+bash filter_to_population.sh EUR_Female
 ```
 
 **Issue: High λ_GC (>1.10)**
@@ -326,10 +326,10 @@ bash filter_to_population.sh EUR_Female_MM
 **Issue: Low sample size in sex-stratified analysis**
 ```bash
 # Check: Are phenotype values mostly missing?
-zcat MRIrun2.EUR_Male_MM.tsv.gz | awk -F'\t' '{print $3}' | grep -v "NA" | wc -l
+zcat MRIrun2.EUR_Male.tsv.gz | awk -F'\t' '{print $3}' | grep -v "NA" | wc -l
 
 # Verify: Phenotype coverage
-zcat results/Day_NoPCs/EUR_Male_MM/bolt_FA.Day_NoPCs.log.gz | grep "Analyzing"
+zcat results/Day_NoPCs/EUR_Male/bolt_FA.Day_NoPCs.log.gz | grep "Analyzing"
 ```
 
 ---

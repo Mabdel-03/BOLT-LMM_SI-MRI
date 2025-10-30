@@ -7,8 +7,8 @@ set -beEo pipefail
 if [ $# -ne 1 ]; then
     echo "Usage: $0 <keep_set>" >&2
     echo "Example: $0 EUR_MM" >&2
-    echo "Example: $0 EUR_Male_MM" >&2
-    echo "Example: $0 EUR_Female_MM" >&2
+    echo "Example: $0 EUR_Male" >&2
+    echo "Example: $0 EUR_Female" >&2
     exit 1
 fi
 
@@ -119,8 +119,8 @@ fi
 echo ""
 echo "Next steps:"
 echo "1. Repeat for other populations:"
-echo "   bash filter_to_population.sh EUR_Male_MM"
-echo "   bash filter_to_population.sh EUR_Female_MM"
-echo "2. Run test: sbatch 0_test_run.sbatch.sh"
+echo "   bash filter_to_population.sh EUR_Male"
+echo "   bash filter_to_population.sh EUR_Female"
+echo "2. Run test: sbatch 0b_test_run.sbatch.sh"
 echo "3. If test passes: sbatch 1_run_bolt_lmm.sbatch.sh"
 

@@ -27,7 +27,7 @@ SRCDIR="/home/mabdel03/data/files/Isolation_Genetics/GWAS/Scripts/ukb21942/BOLT-
 cd ${SRCDIR}
 
 # Filter for each population
-for keep_set in EUR_MM EUR_Male_MM EUR_Female_MM; do
+for keep_set in EUR_MM EUR_Male EUR_Female; do
     echo "========================================"
     echo "Filtering for: ${keep_set}"
     echo "========================================"
